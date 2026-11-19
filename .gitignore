@@ -1,0 +1,8 @@
+# CSVs brutos do Portal da Transparência (baixar pelo link no README)
+dados/brutos/*.csv
+
+# arquivos temporários do Power BI / Windows
+*.tmp
+~$*
+Thumbs.db
+desktop.ini
