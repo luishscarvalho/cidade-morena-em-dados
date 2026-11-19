@@ -97,7 +97,7 @@ Uma página oculta do relatório reconcilia os totais com os arquivos de origem,
 
 1. Baixe os CSVs de despesa de 2020 a 2026 no [Portal da Transparência de Campo Grande](https://transparencia.campogrande.ms.gov.br/canais/despesas-dados-abertos/) (*Dados Abertos > Despesa*) e salve em `dados/brutos/`.
 2. Abra `pbix/cidade_morena_em_dados.pbix` no Power BI Desktop.
-3. Em *Transformar dados > Gerenciar parâmetros*, aponte `CaminhoPasta` para a sua pasta `dados/brutos` e `CaminhoSuporte` para `dados/suporte`.
+3. Em *Transformar dados > Gerenciar parâmetros*, aponte `CaminhoPasta` para a sua pasta `dados/brutos` e `CaminhoPastaSuporte` para `dados/suporte`.
 4. *Atualizar*.
 
 Os scripts M de cada consulta estão em [`powerquery/`](powerquery/), para leitura sem o Power BI.
