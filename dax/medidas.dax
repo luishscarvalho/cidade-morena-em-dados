@@ -1,0 +1,88 @@
+// ===== Base =====
+
+// Soma do valor empenhado (reservado no orçamento). Base de todas as outras medidas.
+Empenhado =
+SUM(fDespesas[total_empenhado])
+
+// Soma do valor liquidado (serviço ou entrega confirmados).
+Liquidado =
+SUM(fDespesas[total_liquidado])
+
+// Soma do valor efetivamente pago.
+Pago =
+SUM(fDespesas[total_pago])
+
+// Quantidade de empenhos (linhas da fato).
+Qtd Empenhos =
+COUNTROWS(fDespesas)
+
+// Quantidade de fornecedores distintos (por CNPJ; pessoas físicas contam como um só, por LGPD).
+Qtd Fornecedores =
+DISTINCTCOUNT(fDespesas[cnpj_fornecedor])
+
+// Valor médio por empenho: Empenhado ÷ Qtd Empenhos.
+Ticket Médio =
+DIVIDE([Empenhado], [Qtd Empenhos])
+
+// ===== Execução =====
+
+// Quanto do empenhado já foi liquidado.
+% Liquidado =
+DIVIDE([Liquidado], [Empenhado])
+
+// Quanto do empenhado já foi pago. Ano corrente tende a ser baixo (empenho global no início do ano).
+% Pago =
+DIVIDE([Pago], [Empenhado])
+
+// ===== Participação =====
+
+// Auxiliar: empenhado ignorando os filtros do próprio visual e respeitando as segmentações.
+Empenhado Total =
+CALCULATE([Empenhado], ALLSELECTED())
+
+// Fatia do item no total visível, respeitando as segmentações.
+% do Total =
+DIVIDE([Empenhado], [Empenhado Total])
+
+// ===== Tempo =====
+
+// Empenhado acumulado de 1º de janeiro até a data do contexto.
+Empenhado Acumulado =
+CALCULATE([Empenhado], DATESYTD(dCalendario[Date]))
+
+// Empenhado no mesmo período do ano anterior. Vazio quando há mais de um ano no contexto.
+Empenhado Ano Anterior =
+IF(
+    HASONEVALUE(dCalendario[Ano]),
+    CALCULATE([Empenhado], DATEADD(dCalendario[Date], -1, YEAR))
+)
+
+// Variação anual do empenhado. Só calcula anos completos; o ano corrente (parcial) fica vazio.
+Var % Ano Anterior =
+VAR UltimaData = CALCULATE(MAX(fDespesas[dataempenho]), ALL(fDespesas))
+VAR UltimoAnoCompleto = YEAR(UltimaData) - 1
+RETURN
+IF(
+    HASONEVALUE(dCalendario[Ano]) && MAX(dCalendario[Ano]) <= UltimoAnoCompleto,
+    DIVIDE([Empenhado] - [Empenhado Ano Anterior], [Empenhado Ano Anterior])
+)
+
+// ===== Ranking =====
+
+// Posição do fornecedor pelo valor empenhado, entre os visíveis nas segmentações.
+Ranking Fornecedor =
+IF(
+    HASONEVALUE(dFornecedor[fornecedor]),
+    RANKX(ALLSELECTED(dFornecedor[fornecedor]), [Empenhado])
+)
+
+// ===== Terceirização =====
+
+// Empenhado no elemento 3.3.90.37 (Locação de Mão de Obra).
+Empenhado Mão de Obra =
+CALCULATE([Empenhado], dItemDespesa[cod_elemento] = "37")
+
+// Participação da locação de mão de obra no empenhado.
+% Mão de Obra =
+DIVIDE([Empenhado Mão de Obra], [Empenhado])
+
