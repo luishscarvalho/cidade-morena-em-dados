@@ -4,7 +4,23 @@
 
 Dashboard em Power BI com **7 anos de despesas públicas (2020 a mai/2026)**: 121.425 empenhos e **R$ 36,8 bilhões** empenhados, tratados a partir dos dados abertos oficiais da prefeitura.
 
-> 🚧 Em construção: ETL, modelagem e medidas DAX prontos; páginas do dashboard em desenvolvimento.
+---
+
+## O dashboard
+
+**1. Visão Geral:** quanto a prefeitura empenha, quanto paga e para quem. As segmentações abrem **sem** os repasses intragovernamentais (a prefeitura pagando a si mesma), e o usuário pode incluí-los.
+
+![Visão Geral](docs/img/pagina_visao_geral.png)
+
+**2. Para onde vai o dinheiro:** árvore de decomposição (categoria > unidade gestora > fornecedor > elemento), ranking de fornecedores, gasto por unidade gestora e o peso da terceirização de mão de obra.
+
+![Para onde vai o dinheiro](docs/img/pagina_para_onde_vai.png)
+
+**3. Raio-x do fornecedor:** página de *drill-through*. Botão direito em qualquer fornecedor > *Detalhar* abre a ficha dele: quanto recebeu por ano, de quais secretarias e o que vendeu.
+
+![Raio-x do fornecedor](docs/img/pagina_raio_x_fornecedor.png)
+
+**Design:** layout feito como imagem de fundo (1280x720) com os visuais nativos posicionados por cima, e tema próprio ([`dados/suporte/tema_cidade_morena.json`](dados/suporte/tema_cidade_morena.json)). A cor principal é terracota, a cor da terra roxa que deu a Campo Grande o apelido de Cidade Morena.
 
 ---
 
@@ -13,6 +29,8 @@ Dashboard em Power BI com **7 anos de despesas públicas (2020 a mai/2026)**: 12
 - **59% do dinheiro não sai da máquina pública.** R$ 21,8 bi dos R$ 36,8 bi empenhados vão para a própria prefeitura, fundos e institutos municipais: folha empenhada em nome do município, contribuição ao instituto de previdência, repasses ao fundo de saúde. O dashboard deixa o usuário escolher se quer ver esses valores.
 - **Folha centralizada.** A Secretaria de Administração (SEMADI) concentra 32% do empenhado, mas 74% disso são vencimentos e 17% obrigações patronais: é por ela que passa a folha de pagamento.
 - **Saúde domina entre os fornecedores externos.** Excluindo os repasses internos, 4 dos 5 maiores recebedores são da saúde. A Santa Casa lidera com R$ 2,5 bi.
+- **Metade do que vai para empresas passa por um único fundo.** Dos R$ 10,5 bi pagos a empresas e entidades, R$ 5,3 bi saem do Fundo Municipal de Saúde, e quase metade disso (R$ 2,5 bi) vai para a Santa Casa, em "outros serviços de terceiros".
+- **Terceirização de mão de obra:** R$ 747 mi em contratos de mão de obra (elemento 3.3.90.37), 5% do que sai da máquina pública.
 - **Crescimento anual:** +14,9% (2021), +15,8% (2022), +2,9% (2023), +12,1% (2024), +2,7% (2025).
 - **Execução cai no ano corrente:** ~100% do empenhado foi pago em 2020 a 2023, contra 38% em 2026. Esperado: a prefeitura empenha o ano inteiro de contratos no início do exercício e paga mês a mês.
 
