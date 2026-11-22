@@ -1,0 +1,81 @@
+{
+ "name": "Cidade Morena",
+ "dataColors": [
+  "#B5562F",
+  "#2A7F7F",
+  "#D9A05B",
+  "#5B6C8F",
+  "#8C8C8C",
+  "#7A3E2A",
+  "#6FB3A8",
+  "#C9C1B6"
+ ],
+ "background": "#FFFFFF",
+ "foreground": "#2B2B2B",
+ "tableAccent": "#B5562F",
+ "good": "#2A7F7F",
+ "neutral": "#D9A05B",
+ "bad": "#B5562F",
+ "textClasses": {
+  "title": {
+   "fontFace": "Segoe UI Semibold",
+   "fontSize": 13,
+   "color": "#2B2B2B"
+  },
+  "header": {
+   "fontFace": "Segoe UI Semibold",
+   "fontSize": 11,
+   "color": "#2B2B2B"
+  },
+  "label": {
+   "fontFace": "Segoe UI",
+   "fontSize": 10,
+   "color": "#4A4A4A"
+  },
+  "callout": {
+   "fontFace": "Segoe UI Semibold",
+   "fontSize": 26,
+   "color": "#B5562F"
+  }
+ },
+ "visualStyles": {
+  "page": {
+   "*": {
+    "background": [
+     {
+      "color": {
+       "solid": {
+        "color": "#F4F1EC"
+       }
+      },
+      "transparency": 0
+     }
+    ]
+   }
+  },
+  "*": {
+   "*": {
+    "background": [
+     {
+      "show": false
+     }
+    ],
+    "border": [
+     {
+      "show": false
+     }
+    ],
+    "dropShadow": [
+     {
+      "show": false
+     }
+    ],
+    "title": [
+     {
+      "show": false
+     }
+    ]
+   }
+  }
+ }
+}
